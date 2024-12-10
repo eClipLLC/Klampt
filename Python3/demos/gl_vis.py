@@ -8,6 +8,7 @@ class GLTest(GLPluginInterface):
         GLPluginInterface.__init__(self)
         self.world = world
         self.sim = sim
+        self.dt = 1.0/30.0
 
     def display(self):
         self.sim.updateWorld()
@@ -15,9 +16,9 @@ class GLTest(GLPluginInterface):
         return True
 
     def idle(self):
-        rfs = sim.controller(0).sensor("RF_ForceSensor")
+        rfs = self.sim.controller(0).sensor("RF_ForceSensor")
         print("Sensor values:",rfs.getMeasurements())
-        sim.simulate(self.dt)
+        self.sim.simulate(self.dt)
         return True
 
 if __name__ == "__main__":
